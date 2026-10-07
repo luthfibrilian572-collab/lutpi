@@ -94,7 +94,34 @@ class MikrotikConfig {
   }
 
   async validateLogin(username, password) {
-    return { success: true, message: 'Login valid' };
+    const conn = await this.connect();
+    if (!conn) return { success: false, message: 'Koneksi ke MikroTik gagal' };
+
+    try {
+      // Ambil daftar user hotspot berdasarkan username dari MikroTik
+      const users = await conn.write('/ip/hotspot/user/print', [
+        `?name=${username}`
+      ]);
+
+      if (!users || users.length === 0) {
+        await conn.close();
+        return { success: false, message: 'User not found' };
+      }
+
+      const user = users[0];
+      // Cek apakah password yang dimasukkan sesuai
+      if (user.password === password) {
+        await conn.close();
+        return { success: true, message: 'Login valid' };
+      } else {
+        await conn.close();
+        return { success: false, message: 'Invalid password' };
+      }
+    } catch (error) {
+      console.error('Error validating login:', error);
+      try { await conn.close(); } catch (e) {}
+      return { success: false, message: error.message };
+    }
   }
 
   // FUNGSI BARU: Ambil statistik akumulasi user & statistik user aktif dari MikroTik
