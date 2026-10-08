@@ -198,7 +198,7 @@ app.get('/api/status/:username', async (req, res) => {
     res.json({ success: true, status: user.status });
   } catch (error) {
     console.error('Status check error:', error);
-    res.status(500).json({ success: false, message: 'Status check failed' });
+    res.status(500).json({ success: false, message: 'Status check fresh failed' });
   }
 });
 
