@@ -106,8 +106,8 @@ app.post('/api/approve', async (req, res) => {
     if (userData) {
       try {
         await mikrotikConfig.addUserToHotspot(userData.username, userData.password);
-      } catch (mtErr) {
-        console.warn('Gagal menambah user langsung ke MikroTik via API (Cloud to Local), dilanjutkan via Redis sync.');
+      } catch (e) {
+        console.warn('Gagal menambah user ke MikroTik otomatis saat approve, silakan pastikan user terdaftar di router.');
       }
     }
     
@@ -153,7 +153,7 @@ app.delete('/api/users/:username', async (req, res) => {
   }
 });
 
-// Validate login
+// Validate login (Aman dari timeout cloud ke lokal router)
 app.post('/api/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -162,7 +162,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Username and password are required' });
     }
     
-    // Get user from storage
+    // Get user from storage (Redis)
     const user = await storageConfig.getUserByUsername(username);
     
     if (!user) {
@@ -179,16 +179,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(403).json({ success: false, message: 'User not approved yet' });
     }
     
-    // Validasi opsional ke MikroTik (dengan pelindung error jika Vercel tidak bisa menjangkau IP lokal router)
-    try {
-      const mikrotikResult = await mikrotikConfig.validateLogin(username, password);
-      if (!mikrotikResult.success) {
-        await mikrotikConfig.addUserToHotspot(username, password);
-      }
-    } catch (mtError) {
-      console.warn('MikroTik direct validation skipped, allowing local hotspot session submission.');
-    }
-    
+    // Berhasil divalidasi via Redis, berikan lampu hijau agar form submit lokal diteruskan ke MikroTik
     res.json({ 
       success: true, 
       message: 'Login successful', 
