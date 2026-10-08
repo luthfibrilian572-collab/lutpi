@@ -137,42 +137,44 @@
         const btnText = document.getElementById('btnText');
         const message = document.getElementById('message');
 
+        let isVerified = false;
+
         form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const usernameVal = document.getElementById('username').value;
-            const passwordVal = document.getElementById('password').value;
+            if (!isVerified) {
+                e.preventDefault();
+                const usernameVal = document.getElementById('username').value;
+                const passwordVal = document.getElementById('password').value;
 
-            submitBtn.disabled = true;
-            btnText.textContent = 'Memeriksa Akun...';
+                submitBtn.disabled = true;
+                btnText.textContent = 'Memeriksa Akun...';
 
-            try {
-                // 1. Cek validasi ke backend Vercel & Redis
-                const response = await fetch(`${BACKEND_URL}/api/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username: usernameVal, password: passwordVal })
-                });
+                try {
+                    const response = await fetch(`${BACKEND_URL}/api/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username: usernameVal, password: passwordVal })
+                    });
 
-                const data = await response.json();
+                    const data = await response.json();
 
-                if (data.success) {
-                    showMessage(`Halo ${data.user.name}, login disetujui! Menghubungkan internet...`, 'success');
-                    
-                    // 2. Beri jeda sebentar lalu lanjutkan submit form asli ke MikroTik agar sesi internet terbuka
-                    setTimeout(() => {
-                        HTMLFormElement.prototype.submit.call(form);
-                    }, 1000);
-                } else {
-                    showMessage(data.message, 'error');
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'Masuk';
-                }
-            } catch (error) {
-                // Fallback jika backend Vercel terhalang jaringan lokal captive portal
-                showMessage('Menghubungkan langsung ke MikroTik...', 'info');
-                setTimeout(() => {
+                    if (data.success) {
+                        showMessage('Login disetujui! Menghubungkan ke internet...', 'success');
+                        isVerified = true; 
+                        
+                        // Lanjutkan submit form asli ke MikroTik agar router mengizinkan akses internet
+                        setTimeout(() => {
+                            HTMLFormElement.prototype.submit.call(form);
+                        }, 800);
+                    } else {
+                        showMessage(data.message, 'error');
+                        submitBtn.disabled = false;
+                        btnText.textContent = 'Masuk';
+                    }
+                } catch (error) {
+                    // Fallback aman jika jaringan Vercel terhalang
+                    isVerified = true;
                     HTMLFormElement.prototype.submit.call(form);
-                }, 1000);
+                }
             }
         });
 
