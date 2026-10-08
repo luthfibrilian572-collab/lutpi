@@ -31,7 +31,6 @@
             min-height: 100vh;
         }
 
-        /* ── LEFT PANEL ── */
         .panel-left {
             flex: 1;
             background: linear-gradient(160deg, #1a0505 0%, #0a0a0f 60%);
@@ -44,7 +43,6 @@
             min-height: 100vh;
         }
 
-        /* geometric accent */
         .panel-left::before {
             content: '';
             position: absolute;
@@ -52,15 +50,6 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(229,62,62,0.18) 0%, transparent 70%);
             top: -80px; right: -80px;
-            pointer-events: none;
-        }
-        .panel-left::after {
-            content: '';
-            position: absolute;
-            width: 260px; height: 260px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(229,62,62,0.1) 0%, transparent 70%);
-            bottom: 60px; left: -60px;
             pointer-events: none;
         }
 
@@ -95,36 +84,12 @@
             letter-spacing: -1px;
             margin-bottom: 18px;
         }
-        .panel-left-body h2 span {
-            color: var(--red);
-        }
+        .panel-left-body h2 span { color: var(--red); }
         .panel-left-body p {
             color: var(--muted);
             font-size: 15px;
             line-height: 1.7;
             max-width: 340px;
-        }
-
-        .features {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 40px;
-        }
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .feature-dot {
-            width: 8px; height: 8px;
-            background: var(--red);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .feature-item span {
-            font-size: 13px;
-            color: #a0aec0;
         }
 
         .panel-left-footer {
@@ -134,7 +99,6 @@
             z-index: 1;
         }
 
-        /* ── RIGHT PANEL ── */
         .panel-right {
             width: 480px;
             flex-shrink: 0;
@@ -154,10 +118,7 @@
             letter-spacing: -0.5px;
             margin-bottom: 6px;
         }
-        .form-header p {
-            color: var(--muted);
-            font-size: 14px;
-        }
+        .form-header p { color: var(--muted); font-size: 14px; }
 
         .form-group { margin-bottom: 20px; }
         .form-group label {
@@ -170,9 +131,7 @@
             margin-bottom: 8px;
         }
 
-        .input-wrap {
-            position: relative;
-        }
+        .input-wrap { position: relative; }
         .input-icon {
             position: absolute;
             left: 14px;
@@ -191,10 +150,8 @@
             font-size: 14px;
             color: var(--text);
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
             font-family: inherit;
         }
-        .form-group input::placeholder { color: #4a5568; }
         .form-group input:focus {
             border-color: var(--red);
             background: rgba(229,62,62,0.05);
@@ -212,22 +169,10 @@
             font-weight: 600;
             cursor: pointer;
             font-family: inherit;
-            letter-spacing: 0.1px;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-            box-shadow: 0 4px 16px rgba(229,62,62,0.35);
             margin-top: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            box-shadow: 0 4px 16px rgba(229,62,62,0.35);
         }
-        .btn-primary:hover:not(:disabled) {
-            background: var(--red-dk);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 24px rgba(229,62,62,0.45);
-        }
-        .btn-primary:active:not(:disabled) { transform: translateY(0); }
-        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-primary:hover { background: var(--red-dk); }
 
         .divider {
             display: flex;
@@ -241,24 +186,11 @@
             height: 1px;
             background: var(--border);
         }
-        .divider span {
-            font-size: 12px;
-            color: #4a5568;
-        }
+        .divider span { font-size: 12px; color: #4a5568; }
 
-        .footer-link {
-            text-align: center;
-            font-size: 13px;
-            color: var(--muted);
-        }
-        .footer-link a {
-            color: var(--red-lt);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .footer-link a:hover { text-decoration: underline; }
+        .footer-link { text-align: center; font-size: 13px; color: var(--muted); }
+        .footer-link a { color: var(--red-lt); text-decoration: none; font-weight: 600; }
 
-        /* Message */
         .message {
             padding: 12px 14px;
             border-radius: 8px;
@@ -271,141 +203,32 @@
         .message.error   { background: rgba(229,62,62,0.12);  color: #fc8181; border: 1px solid rgba(229,62,62,0.2); }
         .message.info    { background: rgba(66,153,225,0.12); color: #63b3ed; border: 1px solid rgba(66,153,225,0.2); }
 
-        /* Status check */
-        .status-panel {
-            margin-top: 20px;
-            padding: 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: none;
-        }
-        .status-panel.show { display: block; }
-        .status-panel-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: #4a5568;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-        .status-row { display: flex; gap: 8px; }
-        .status-row input {
-            flex: 1;
-            padding: 10px 12px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--text);
-            outline: none;
-            font-family: inherit;
-        }
-        .status-row input:focus { border-color: var(--red); }
-        .status-row button {
-            padding: 10px 16px;
-            background: rgba(229,62,62,0.15);
-            border: 1px solid rgba(229,62,62,0.3);
-            color: #fc8181;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            white-space: nowrap;
-            transition: background 0.2s;
-        }
-        .status-row button:hover { background: rgba(229,62,62,0.25); }
-
-        .status-result {
-            margin-top: 10px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            display: none;
-        }
-        .status-result.approved  { background: rgba(72,187,120,0.12); color: #68d391; border: 1px solid rgba(72,187,120,0.2); }
-        .status-result.pending   { background: rgba(246,173,85,0.12);  color: #f6ad55; border: 1px solid rgba(246,173,85,0.2); }
-        .status-result.rejected  { background: rgba(229,62,62,0.12);   color: #fc8181; border: 1px solid rgba(229,62,62,0.2); }
-        .status-result.not-found { background: rgba(113,128,150,0.12); color: #a0aec0; border: 1px solid rgba(113,128,150,0.2); }
-
-        .toggle-status {
-            background: none;
-            border: none;
-            color: #4a5568;
-            font-size: 12px;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 14px;
-            display: block;
-            width: 100%;
-            text-align: center;
-            font-family: inherit;
-            transition: color 0.2s;
-        }
-        .toggle-status:hover { color: #fc8181; }
-
-        .loading {
-            display: inline-block;
-            width: 15px; height: 15px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Responsive */
         @media (max-width: 860px) {
             .panel-left { display: none; }
-            .panel-right {
-                width: 100%;
-                border-left: none;
-                padding: 40px 28px;
-            }
+            .panel-right { width: 100%; padding: 40px 28px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LEFT: Branding -->
     <div class="panel-left">
         <div class="brand">
             <div class="brand-icon">📶</div>
             <span class="brand-name">HotspotNet</span>
         </div>
-
         <div class="panel-left-body">
             <h2>Akses internet<br>lebih <span>mudah</span><br>dari sebelumnya.</h2>
-            <p>Daftar sekali, nikmati koneksi WiFi gratis kapanpun kamu berada di jaringan kami.</p>
-            <div class="features">
-                <div class="feature-item">
-                    <div class="feature-dot"></div>
-                    <span>Registrasi cepat &amp; gratis</span>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-dot"></div>
-                    <span>Koneksi stabil &amp; aman</span>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-dot"></div>
-                    <span>Didukung teknologi MikroTik</span>
-                </div>
-            </div>
+            <p>Daftar sekali, nikmati koneksi WiFi gratis kapanpun kamu berada.</p>
         </div>
-
         <div class="panel-left-footer">© 2026 HotspotNet. All rights reserved.</div>
     </div>
 
-    <!-- RIGHT: Form -->
     <div class="panel-right">
         <div class="form-header">
             <h1>Selamat datang 👋</h1>
             <p>Masuk ke akun kamu untuk mulai browsing</p>
         </div>
 
-        <!-- FORM LOGIN BACKEND + HIDDEN MIKROTIK -->
         <form id="loginForm" name="login" action="$(link-login-only)" method="post">
             <input type="hidden" name="dst" value="$(link-orig)">
             <input type="hidden" name="popup" value="true">
@@ -432,127 +255,54 @@
         </form>
 
         <div class="message" id="message"></div>
-
         <div class="divider"><span>atau</span></div>
-
         <div class="footer-link">
             Belum punya akun? <a href="register.html">Daftar sekarang</a>
         </div>
-
-        <div class="status-panel" id="statusCheck">
-            <div class="status-panel-title">Cek Status Registrasi</div>
-            <div class="status-row">
-                <input type="text" id="checkUsername" placeholder="Masukkan username">
-                <button type="button" onclick="checkStatus()">Cek</button>
-            </div>
-            <div class="status-result" id="statusResult"></div>
-        </div>
-
-        <button type="button" class="toggle-status" onclick="toggleStatusCheck()">
-            Cek status registrasi kamu
-        </button>
     </div>
 
     <script>
-        // BACKEND URL statis absolut untuk menghindari masalah captive portal MikroTik
         const BACKEND_URL = 'https://lutpi-2.vercel.app';
-
         const form = document.getElementById('loginForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const message = document.getElementById('message');
-        const statusCheck = document.getElementById('statusCheck');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const usernameVal = document.getElementById('username').value;
             const passwordVal = document.getElementById('password').value;
 
-            const formData = {
-                username: usernameVal,
-                password: passwordVal
-            };
-
-            // Show loading
             submitBtn.disabled = true;
-            btnText.innerHTML = '<span class="loading"></span>';
+            btnText.innerHTML = 'Memproses...';
 
             try {
                 const response = await fetch(`${BACKEND_URL}/api/login`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: usernameVal, password: passwordVal })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
                     showMessage(`Selamat datang, ${data.user.name}! Login berhasil.`, 'success');
-                    
                     setTimeout(() => {
-                        showMessage('Anda akan diarahkan ke internet...', 'info');
-                        // Lanjutkan submit form agar MikroTik mengenali sesi aktif user
+                        showMessage('Menghubungkan ke internet...', 'info');
                         HTMLFormElement.prototype.submit.call(form);
-                    }, 1500);
+                    }, 1200);
                 } else {
                     showMessage(data.message, 'error');
                     submitBtn.disabled = false;
                     btnText.textContent = 'Masuk';
                 }
             } catch (error) {
-                // Fallback jika backend offline tapi ingin tetap bisa login langsung ke MikroTik
-                showMessage('Backend offline, mencoba langsung login ke MikroTik...', 'info');
+                showMessage('Terhubung langsung ke MikroTik...', 'info');
                 setTimeout(() => {
                     HTMLFormElement.prototype.submit.call(form);
                 }, 1000);
             }
         });
-
-        function toggleStatusCheck() {
-            statusCheck.classList.toggle('show');
-        }
-
-        async function checkStatus() {
-            const username = document.getElementById('checkUsername').value;
-            const statusResult = document.getElementById('statusResult');
-
-            if (!username) {
-                statusResult.textContent = 'Masukkan username';
-                statusResult.className = 'status-result not-found';
-                statusResult.style.display = 'block';
-                return;
-            }
-
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/status/${username}`);
-                const data = await response.json();
-
-                if (data.success) {
-                    statusResult.textContent = `Status: ${data.status.toUpperCase()}`;
-                    statusResult.className = `status-result ${data.status}`;
-                    statusResult.style.display = 'block';
-
-                    if (data.status === 'pending') {
-                        statusResult.textContent += ' — Menunggu approval admin';
-                    } else if (data.status === 'approved') {
-                        statusResult.textContent += ' — Silakan login';
-                    } else if (data.status === 'rejected') {
-                        statusResult.textContent += ' — Registrasi ditolak';
-                    }
-                } else {
-                    statusResult.textContent = data.message;
-                    statusResult.className = 'status-result not-found';
-                    statusResult.style.display = 'block';
-                }
-            } catch (error) {
-                statusResult.textContent = 'Gagal mengecek status (Server backend tidak aktif)';
-                statusResult.className = 'status-result not-found';
-                statusResult.style.display = 'block';
-            }
-        }
 
         function showMessage(text, type) {
             message.textContent = text;
