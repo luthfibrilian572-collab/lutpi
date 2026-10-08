@@ -55,18 +55,22 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// Get all users (admin only) - DIPERBARUI DENGAN STATISTIK MIKROTIK
+// Get all users (admin only) - AMAN DARI TIMEOUT MIKROTIK
 app.get('/api/users', async (req, res) => {
   try {
     const users = await storageConfig.getAllUsers();
     
-    // Ambil data statistik aktif & user dari MikroTik
+    // Ambil data statistik aktif & user dari MikroTik dengan pelindung try-catch
     let mikrotikStats = [];
-    if (mikrotikConfig.getUsersStats && typeof mikrotikConfig.getUsersStats === 'function') {
-      mikrotikStats = await mikrotikConfig.getUsersStats();
+    try {
+      if (mikrotikConfig.getUsersStats && typeof mikrotikConfig.getUsersStats === 'function') {
+        mikrotikStats = await mikrotikConfig.getUsersStats();
+      }
+    } catch (mtError) {
+      console.warn('MikroTik stats skipped due to timeout/connection issue');
     }
 
-    // Gabungkan data user storage dengan statistik MikroTik
+    // Gabungkan data user storage dengan statistik MikroTik (jika ada)
     const enrichedUsers = users.map(user => {
       const stats = mikrotikStats.find(s => s.name === user.username || s.user === user.username) || {};
       
