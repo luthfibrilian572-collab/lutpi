@@ -397,8 +397,8 @@
     </div>
 
     <script>
-        // Menggunakan domain secara otomatis sesuai URL aktif browser (Aman untuk Vercel & MikroTik Captive Portal)
-        const BACKEND_URL = window.location.origin;
+        // Menggunakan domain Vercel utama secara absolut agar tembus dari MikroTik Captive Portal
+        const BACKEND_URL = 'https://lutpi-2.vercel.app';
 
         const form = document.getElementById('registerForm');
         const submitBtn = document.getElementById('submitBtn');
