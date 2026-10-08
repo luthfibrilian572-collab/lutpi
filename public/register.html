@@ -397,8 +397,10 @@
     </div>
 
     <script>
-        // Menggunakan domain Vercel utama secara absolut agar aman diakses dari HP / Captive Portal MikroTik
-        const BACKEND_URL = 'https://lutpi-2.vercel.app';
+        // Otomatis mendeteksi domain Vercel yang sedang aktif, atau fallback ke domain produksi utama Anda
+        const BACKEND_URL = window.location.origin.includes('vercel.app') 
+            ? window.location.origin 
+            : 'https://lutpi-2-main-luthfi16.vercel.app'; // Ganti jika domain utama Anda berbeda
 
         const form = document.getElementById('registerForm');
         const submitBtn = document.getElementById('submitBtn');
